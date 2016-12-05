@@ -22,7 +22,7 @@
   title: "Waterloo Sunset",
   artist: "The Kinks",
   year: 1967,
-  address: "Waterloo", 
+  address: "Waterloo Bridge", 
   location: {
             lat: 51.501737, 
             lng: -0.108588
@@ -40,7 +40,7 @@
     title: "Werewolves of London",
   artist: "Warren Zevon",
   year: 1977, 
-  address: "Gerrard Street",
+  address: "Gerrard Street, London",
   location: {
             lat: 51.511757,
             lng: -0.131086
@@ -58,7 +58,7 @@
     title: "I Don't Want To Go To Chelsea",
   artist: "Elvis Costello",
   year: 1978, 
-  address: "Chelsea",
+  address: "Chelsea, London",
   location: {
             lat: 51.485093,
             lng: -0.174936
@@ -76,7 +76,7 @@
     title: "Up the Junction",
   artist: "Squeeze",
   year: 1979, 
-  address: "Clapham Junction",
+  address: "Clapham",
   location: {
             lat: 51.465174,
             lng: -0.170811
@@ -91,10 +91,10 @@
             lng: -0.120576
         }
     }, {
-    title: "Electric Avenue ",
+    title: "Electric Avenue",
   artist: "Eddy Grant",
   year: 1982, 
-  address: "Electric Avenue, Brixton",
+  address: "Brixton Market",
   location: {
             lat: 51.462168,
             lng: -0.114004
@@ -109,7 +109,7 @@
             lng: -0.136549
         }
     }, {
-    title: "Common People ",
+    title: "Common People",
   artist: "Pulp",
   year: 1995, 
   address: "St Martins College",
@@ -118,7 +118,7 @@
             lng: -0.108875
         }
     }, {
-    title: "Fake Plastic Tress",
+    title: "Fake Plastic Trees",
   artist: "Radiohead",
   year: 1995, 
   address: "Canary Wharf",
@@ -136,7 +136,7 @@
             lng: 0.14743
         }
     }, {
-    title: "Up The Bracket ",
+    title: "Up The Bracket",
   artist: "The Libertines",
   year: 2002, 
   address: "Bethnal Green",
@@ -190,7 +190,7 @@ function initMap() {
 //view model
 function ViewModel () {
   
-  var self = this; 
+  var self = this;
 
   //Marking the tracklist a knockout observable array  
   self.songLocation = ko.observableArray(tracklist);
@@ -200,24 +200,41 @@ function ViewModel () {
     var position = tracklist[i].location;
     var title = tracklist[i].title;
     var artist = tracklist[i].artist; 
-    var description = "Inspired by " + tracklist[i].address; 
+    var location = tracklist[i].address; 
     var year = tracklist[i].year; 
     var fullTitle = title + " by " + artist; 
     var marker = new google.maps.Marker({
         map: map,
         position: position,
-        title: fullTitle,
-        description: description
+        location: location,
+        title: fullTitle
+        //description: description
     });
 
     //marker on map for each song
     self.songLocation()[i].marker = marker;
-
+  
     //browser listens for marker click to make info window
     marker.addListener('click', function() {
       self.populateInfoWindow(this, largeInfowindow);
         })
-    } 
+    
+
+    /*//Wiki Ajax request for each song
+    $.ajax ({
+        url: wikiURL, 
+        dataType: "jsonp", 
+        success: function(response) {
+         var articleList = response[1]; 
+             for (var i = 0; i < articleList.length; i++) {
+                articleString = articleList[i] 
+                var url = 'http://en.wikipedia.org/wiki/' + articleString; 
+                console.log(articleString); 
+                //$wikiElem.prepend('<li><a href="' + url + '">' + articleString + '</a></li>'); 
+            }; 
+        }
+
+    }) */
           //or if the title in list 
     self.showMarker = function(clickedItem) {
       self.populateInfoWindow(clickedItem.marker, largeInfowindow)
@@ -227,7 +244,7 @@ function ViewModel () {
     self.populateInfoWindow = function(marker, infowindow) {
       if (infowindow.marker != marker) {
           infowindow.marker = marker;
-          infowindow.setContent('<div><h4>' + marker.title + '</h4><div>' + marker.description + '</div><div> Spotify place holder</div><div>Wiki</div></div>');
+          infowindow.setContent('<div><h4>' + marker.title + '</h4><div>Find out more about <a href="https://en.wikipedia.org/wiki/' + marker.location + '">' + marker.location + '</a>, the place that inspired the song on Wikipedia.</div><div>Hear the song on spotify: </div></div>');
           infowindow.open(map, marker);
           //listern to close marker
           infowindow.addListener('closeclick', function() {
@@ -235,10 +252,13 @@ function ViewModel () {
           });
         }
       };
+
+   }   
+
   }
 };    
 
-      
+    
 
 
 
