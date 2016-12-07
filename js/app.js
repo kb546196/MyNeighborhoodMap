@@ -1,8 +1,7 @@
   //Array of song/ location objects  
   
   var tracklist  = [{
-  title: "Fool on the Hill",
-  artist: "The Beatles",
+  title: "Fool on the Hill by The Beatles",
   year: 1967, 
   address: "Primrose Hill",
   location: {
@@ -10,8 +9,7 @@
             lng: -0.154993
         }
     }, {
-    title: "Itchycoo Park",
-  artist: "Small Faces",
+    title: "Itchycoo Park by Small Faces",
   year: 1967, 
   address: "Little Ilford Park",
   location: {
@@ -19,8 +17,7 @@
             lng: 0.066476
         }
     }, {
-  title: "Waterloo Sunset",
-  artist: "The Kinks",
+  title: "Waterloo Sunset by The Kinks",
   year: 1967,
   address: "Waterloo Bridge", 
   location: {
@@ -28,8 +25,7 @@
             lng: -0.108588
         }
     }, {
-      title: "The Battle of Epping Forest",
-    artist: "Genesis",
+      title: "The Battle of Epping Forest by Genesis",
     year: 1973, 
     address: "Epping Forest",
     location: {
@@ -37,8 +33,7 @@
             lng: 0.041282
         }
     },{
-    title: "Werewolves of London",
-  artist: "Warren Zevon",
+    title: "Werewolves of London by Warren Zevon",
   year: 1977, 
   address: "Gerrard Street, London",
   location: {
@@ -46,8 +41,7 @@
             lng: -0.131086
         }
     }, {
-    title: "Hong Kong Garden",
-  artist: "Siouxsie and the Banshees",
+    title: "Hong Kong Garden by Siouxsie and the Banshees",
   year: 1978, 
   address: "Chislehurst",
   location: {
@@ -55,8 +49,7 @@
             lng: 0.077487
         }
     },{
-    title: "I Don't Want To Go To Chelsea",
-  artist: "Elvis Costello",
+    title: "I Don't Want To Go To Chelsea by Elvis Costello",
   year: 1978, 
   address: "Chelsea, London",
   location: {
@@ -64,8 +57,7 @@
             lng: -0.174936
         }
     },{
-    title: "Baker Street",
-  artist: "Gerry Rafferty",
+    title: "Baker Street by Gerry Rafferty",
   year: 1978, 
   address: "Baker Street",
   location: {
@@ -73,8 +65,7 @@
             lng: -0.15685
         }
     },{
-    title: "Up the Junction",
-  artist: "Squeeze",
+    title: "Up the Junction by Squeeze",
   year: 1979, 
   address: "Clapham",
   location: {
@@ -82,8 +73,7 @@
             lng: -0.170811
         }
     },{
-    title: "The Guns of Brixton",
-  artist: "The Clash",
+    title: "The Guns of Brixton by The Clash",
   year: 1979, 
   address: "Brixton",
   location: {
@@ -91,8 +81,7 @@
             lng: -0.120576
         }
     }, {
-    title: "Electric Avenue",
-  artist: "Eddy Grant",
+    title: "Electric Avenue by Eddy Grant",
   year: 1982, 
   address: "Brixton Market",
   location: {
@@ -100,8 +89,7 @@
             lng: -0.114004
         }
     }, {
-    title: "West End Girls",
-  artist: "Pet Shop Boys",
+    title: "West End Girls by Pet Shop Boys",
   year: 1984, 
   address: "Soho",
   location: {
@@ -109,8 +97,7 @@
             lng: -0.136549
         }
     }, {
-    title: "Common People",
-  artist: "Pulp",
+    title: "Common People by Pulp",
   year: 1995, 
   address: "St Martins College",
   location: {
@@ -118,8 +105,7 @@
             lng: -0.108875
         }
     }, {
-    title: "Fake Plastic Trees",
-  artist: "Radiohead",
+    title: "Fake Plastic Trees by Radiohead",
   year: 1995, 
   address: "Canary Wharf",
   location: {
@@ -127,8 +113,7 @@
             lng: -0.023533
         }
     }, {
-    title: "Dagenham Dave",
-  artist: "Morrissey",
+    title: "Dagenham Dave by Morrissey",
   year: 1995, 
   address: "Dagenham",
   location: {
@@ -136,8 +121,7 @@
             lng: 0.14743
         }
     }, {
-    title: "Up The Bracket",
-  artist: "The Libertines",
+    title: "Up The Bracket by The Libertines",
   year: 2002, 
   address: "Bethnal Green",
   location: {
@@ -145,8 +129,7 @@
             lng: -0.06672
         }
     }, {
-    title: "22 Grand Job",
-  artist: "The Rakes",
+    title: "22 Grand Job by The Rakes",
   year: 2005, 
   address: "City of London",
   location: {
@@ -154,8 +137,7 @@
             lng: -0.081325
         }
     }, {
-    title: "Upper Clapton Dance",
-  artist: "Professor Green",
+    title: "Upper Clapton Dance by Professor Green",
   year: 2009, 
   address: "Upper Clapton",
   location: {
@@ -163,8 +145,7 @@
             lng: -0.06119
         }
     },{
-    title: "River Lea",
-  artist: "Adele",
+    title: "River Lea by Adele",
   year: 2015, 
   address: "River Lea",
   location: {
@@ -173,6 +154,10 @@
         }
     }
 ];
+
+
+
+
 //Function to show the GoogleMap on the site (centred nr Barbican central London)
 function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -199,15 +184,13 @@ function ViewModel () {
   for (var i = 0; i < tracklist.length; i++) {
     var position = tracklist[i].location;
     var title = tracklist[i].title;
-    var artist = tracklist[i].artist; 
     var location = tracklist[i].address; 
     var year = tracklist[i].year; 
-    var fullTitle = title + " by " + artist; 
     var marker = new google.maps.Marker({
         map: map,
         position: position,
         location: location,
-        title: fullTitle
+        title: title
         //description: description
     });
 
@@ -218,33 +201,20 @@ function ViewModel () {
     marker.addListener('click', function() {
       self.populateInfoWindow(this, largeInfowindow);
         })
-    
 
-    /*//Wiki Ajax request for each song
-    $.ajax ({
-        url: wikiURL, 
-        dataType: "jsonp", 
-        success: function(response) {
-         var articleList = response[1]; 
-             for (var i = 0; i < articleList.length; i++) {
-                articleString = articleList[i] 
-                var url = 'http://en.wikipedia.org/wiki/' + articleString; 
-                console.log(articleString); 
-                //$wikiElem.prepend('<li><a href="' + url + '">' + articleString + '</a></li>'); 
-            }; 
-        }
-
-    }) */
+      
           //or if the title in list 
     self.showMarker = function(clickedItem) {
       self.populateInfoWindow(clickedItem.marker, largeInfowindow)
     }
+
+    
       
     //links info window and describes info to put in their
     self.populateInfoWindow = function(marker, infowindow) {
       if (infowindow.marker != marker) {
           infowindow.marker = marker;
-          infowindow.setContent('<div><h4>' + marker.title + '</h4><div>Find out more about <a href="https://en.wikipedia.org/wiki/' + marker.location + '">' + marker.location + '</a>, the place that inspired the song on Wikipedia.</div><div>Hear the song on spotify: </div></div>');
+          infowindow.setContent('<div><h4>' + marker.title + '</h4><div>Find out more about <a href="https://en.wikipedia.org/wiki/' + marker.location + '">' + marker.location + '</a>, the place that inspired the song on Wikipedia.</div><p id="player"></iframe></div>');
           infowindow.open(map, marker);
           //listern to close marker
           infowindow.addListener('closeclick', function() {
@@ -252,15 +222,6 @@ function ViewModel () {
           });
         }
       };
-
-   }   
-
-  }
-};    
-
-    
-
-
-
-
-
+   }
+ }
+}; 
