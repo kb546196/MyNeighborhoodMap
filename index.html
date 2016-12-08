@@ -11,10 +11,10 @@
   </head>
   <body>
   	<div id="list-container">
-  		<h2>Tracklist of London</h2>
-  		<p>Songs inspired by places in the city</p>
-  		<h2 id='filter-title'>Filter</h2>
-      <input data-bind="textInput: filter, valueUpdate: 'afterkeydown'"></input>
+  		<h2>Tracklist London</h2>
+  		<p>Places in the city that have inspired famous songs</p>
+  		<p id='filter'>Search through the songs: 
+      <input data-bind="textInput: filter, valueUpdate: 'afterkeydown'"></input></p>
   		<ul class="songs-list" data-bind="foreach: filterList">
   		<li><a class="placeListItems" data-bind="text: title, click: $parent.showMarker"> </a></li>
   		</ul>

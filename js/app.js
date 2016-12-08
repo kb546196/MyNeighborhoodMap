@@ -2,7 +2,6 @@
   
   var tracklist  = [{
   title: "Fool on the Hill by The Beatles",
-  year: 1967, 
   vidID: "DGEX_7IqaC4",
   address: "Primrose Hill",
   location: {
@@ -11,7 +10,6 @@
         }
     }, {
     title: "Itchycoo Park by Small Faces",
-  year: 1967, 
   vidID: "SdItVDTScAU",
   address: "Ilford",
   location: {
@@ -20,7 +18,6 @@
         }
     }, {
   title: "Waterloo Sunset by The Kinks",
-  year: 1967,
   vidID: "N_MqfF0WBsU",
   address: "Waterloo Bridge", 
   location: {
@@ -29,7 +26,6 @@
         }
     }, {
       title: "The Battle of Epping Forest by Genesis",
-    year: 1973, 
     vidID: "knH8GriD-t8",
     address: "Epping Forest",
     location: {
@@ -38,7 +34,6 @@
         }
     },{
     title: "Werewolves of London by Warren Zevon",
-    year: 1977, 
     vidID: "iDpYBT0XyvA",
     address: "Gerrard Street, London",
     location: {
@@ -47,7 +42,6 @@
         }
     }, {
     title: "Hong Kong Garden by Siouxsie and the Banshees",
-  year: 1978, 
   vidID: "Y6lxuYme-8c",
   address: "Chislehurst",
   location: {
@@ -56,7 +50,6 @@
         }
     },{
     title: "I Don't Want To Go To Chelsea by Elvis Costello",
-  year: 1978, 
   vidID: "ITx5vzQi0go",
   address: "Chelsea, London",
   location: {
@@ -65,7 +58,6 @@
         }
     },{
     title: "Baker Street by Gerry Rafferty",
-  year: 1978, 
   vidID: "eJIXc3-exUk",
   address: "Baker Street",
   location: {
@@ -74,7 +66,6 @@
         }
     },{
     title: "Up the Junction by Squeeze",
-  year: 1979,
   vidID: "xj-wFpWpBs4",
   address: "Clapham",
   location: {
@@ -83,7 +74,6 @@
         }
     },{
     title: "The Guns of Brixton by The Clash",
-  year: 1979, 
   vidID: "qgfdUzflEnw",
   address: "Brixton",
   location: {
@@ -92,7 +82,6 @@
         }
     }, {
     title: "Electric Avenue by Eddy Grant",
-  year: 1982, 
   vidID: "vtPk5IUbdH0",
   address: "Brixton Market",
   location: {
@@ -101,7 +90,6 @@
         }
     }, {
     title: "West End Girls by Pet Shop Boys",
-  year: 1984, 
   vidID: "-ycCcWDmpOQ",
   address: "Soho",
   location: {
@@ -110,7 +98,6 @@
         }
     }, {
     title: "Common People by Pulp",
-  year: 1995, 
   vidID: "cbQ7UFyqRpY",
   address: "St Martins College",
   location: {
@@ -119,7 +106,6 @@
         }
     }, {
     title: "Fake Plastic Trees by Radiohead",
-  year: 1995, 
   vidID: "n5h0qHwNrHk",
   address: "Canary Wharf",
   location: {
@@ -128,7 +114,6 @@
         }
     },  {
     title: "Up The Bracket by The Libertines",
-  year: 2002, 
   vidID: "m8lTyYlQ-Wg",
   address: "Bethnal Green",
   location: {
@@ -137,7 +122,6 @@
         }
     }, {
     title: "22 Grand Job by The Rakes",
-  year: 2005, 
   vidID: "dDh_ERdynqQ",
   address: "City of London",
   location: {
@@ -146,7 +130,6 @@
         }
     }, {
     title: "Upper Clapton Dance by Professor Green",
-  year: 2009, 
   vidID: "IIuQM_q0IUU",
   address: "Upper Clapton",
   location: {
@@ -155,7 +138,6 @@
         }
     },{
     title: "River Lea by Adele",
-  year: 2015, 
   vidID: "i5k5f3eG-BA",
   address: "River Lea",
   location: {
@@ -195,7 +177,6 @@ function ViewModel () {
     var position = tracklist[i].location;
     var title = tracklist[i].title;
     var location = tracklist[i].address; 
-    var year = tracklist[i].year; 
     var vidID = tracklist[i].vidID; 
     var marker = new google.maps.Marker({
         map: map,
@@ -203,7 +184,6 @@ function ViewModel () {
         location: location,
         id: vidID,
         title: title
-        //description: description
     });
   
     //marker on map for each song
