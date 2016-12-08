@@ -13,8 +13,9 @@
   	<div id="list-container">
   		<h2>Tracklist of London</h2>
   		<p>Songs inspired by places in the city</p>
-  		<p>Options to filter here on year</p>
-  		<ul class="songs-list" data-bind="foreach: tracklist">
+  		<h2 id='filter-title'>Filter</h2>
+      <input data-bind="textInput: filter, valueUpdate: 'afterkeydown'"></input>
+  		<ul class="songs-list" data-bind="foreach: filterList">
   		<li><a class="placeListItems" data-bind="text: title, click: $parent.showMarker"> </a></li>
   		</ul>
   	</div>

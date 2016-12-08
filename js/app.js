@@ -253,6 +253,19 @@ function ViewModel () {
           });
         }
       };
+
+}
+
+//Filter for the list 
+    self.filter = ko.observable('');
+
+    self.filterList = ko.computed(function() {
+      return ko.utils.arrayFilter(self.songLocation(), function(filteredPlaces) {
+        var matched = filteredPlaces.title.toLowerCase().indexOf(self.filter().toLowerCase()) >= 0;
+        filteredPlaces.marker.setVisible(matched);
+      return matched;
+    })
+  })
    }
- }
+ 
 }; 
