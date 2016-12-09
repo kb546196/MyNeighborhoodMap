@@ -1,4 +1,113 @@
-  //Array of song/ location objects  
+
+//Styles for GoogleMaps API
+var styles = [
+  {
+  //stations, hospitals, points of interest labels 
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ] 
+  }, 
+  {
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [
+      {
+       "color": "#252839"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#0d1544"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3c415e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "stylers": [
+      {
+        "color": "#3c415e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station.airport",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#3c415e"
+      }
+    ]
+  },
+  {
+      //shapes of poi (mainly buildings)  
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#4d4d4f"
+            }
+        ]
+    },
+ {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#4d4d4f" 
+      }
+    ]
+  },
+  {
+        //color of names of places
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },{ 
+    //outline of names
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#000000"
+            },
+            {
+                "weight": 2
+            }
+        ]
+    }, 
+    {
+      //stree names
+    "featureType": "road", 
+    "elementType": "labels",
+    "stylers": [ 
+      { 
+        "visibility": "off" 
+      } 
+    ] 
+  },
+
+] //Array of song/ location objects  
   
   var tracklist  = [{
   title: "Fool on the Hill by The Beatles",
@@ -147,14 +256,16 @@
     }
 ];
 
-
+var defaultIcon = 'images/black_record.png'; 
+var highlightedIcon = 'images/yellow_record.png'; 
 
 
 //Function to show the GoogleMap on the site (centred nr Barbican central London)
 function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 51.533888, lng: -0.097642},
-        zoom: 11,
+        zoom: 12,
+        styles: styles,
         mapTypeControl: false
       });
       //creating  var for the info window 
@@ -183,7 +294,8 @@ function ViewModel () {
         position: position,
         location: location,
         id: vidID,
-        title: title
+        title: title,  
+        icon: defaultIcon
     });
   
     //marker on map for each song
@@ -215,7 +327,12 @@ function ViewModel () {
     marker.addListener('click', function() {
       self.populateInfoWindow(this, largeInfowindow);
         })
-
+    marker.addListener('mouseover', function() {
+            this.setIcon(highlightedIcon);
+          });
+    marker.addListener('mouseout', function() {
+            this.setIcon(defaultIcon);
+          });
           //or if the title in list 
     self.showMarker = function(clickedItem) {
       self.populateInfoWindow(clickedItem.marker, largeInfowindow)
@@ -225,7 +342,11 @@ function ViewModel () {
     self.populateInfoWindow = function(marker, infowindow) {
       if (infowindow.marker != marker) {
           infowindow.marker = marker;
-          infowindow.setContent('<div><h4>' + marker.title + '</h4><div>Find out more about <a href="https://en.wikipedia.org/wiki/' + marker.location + '">' + marker.location + '</a>, the place that inspired the song on Wikipedia.</div> <iframe id="existing-iframe-example" width="256" height="144" src="https://www.youtube.com/embed/' + marker.id + '?enablejsapi=1" frameborder="0"style="border: solid 4px #37474F" ></iframe>');
+          infowindow.setContent(
+            '<div><h4>' + marker.title + '</h4><div>A song inspired by ' + marker.location + 
+            '</div> <iframe id="existing-iframe-example" width="256" height="144" src="https://www.youtube.com/embed/' 
+            + marker.id + '?enablejsapi=1" frameborder="0"style="border: solid 4px #37474F" ></iframe><div>Video from YouTube.</div><div>Find out more about <a href="https://en.wikipedia.org/wiki/' 
+            + marker.location + '">' + marker.location + '</a>, on Wikipedia.</div>');
           infowindow.open(map, marker);
           //listern to close marker
           infowindow.addListener('closeclick', function() {
