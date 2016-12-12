@@ -1,4 +1,4 @@
-html, body {
+html, body, .container {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -9,37 +9,46 @@ html, body {
 
        }
 
-#list-container {
-	width: 30%; 
-  max-width: 300px; 
-	height: 100%; 
-
-}
-
 
 #map {
       bottom:0px;
-      height: 100vw;
-      left: 30%;
+      height: 95vh;
+      width: 100vw; 
+      left: 0px;
       right: 0px;
-      position: absolute;
 }
 
-h1 {
-  margin: 25px 0px 20px 20px; 
+
+.title-container {
+    border-bottom-style: solid;
+    margin: 0 0 10px 0;
 }
 
-h3, p {
-  margin: 0px 0px 10px 20px; 
+.song-nav { 
+padding: 0 10px 0 0; 
+}
+
+h2, p, input {
+  margin: 20px 10px 10px 20px; 
 }
 
 input { 
   border-color: #252839; 
   color: #252839; 
-  font-size: 24px; 
+  font-size: 16px; 
+  margin: 0 25px; 
  }
 
 li {
     list-style-type: square;
     margin: 5px;  
+} 
+
+@media screen and (max-width: 767px) {
+  
+.song-nav { 
+  font-size: 150%; 
+  margin: auto;  
 }
+
+ }

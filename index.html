@@ -7,21 +7,31 @@
     <script src="js/knockout.js"></script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src='js/app.js'></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   </head>
   <body>
-  	<div id="list-container">
-  		<h1>Tracklist London</h1>
-  		<p>Places in London that have inspired famous songs</p>
-  		<p id='filter'>Search through the songs: 
-      <input data-bind="textInput: filter, valueUpdate: 'afterkeydown'"></input></p>
-  		<h3>Tracklist</h3>
-      <ul class="songs-list" data-bind="foreach: filterList">
-  		<li><a class="placeListItems" data-bind="text: title, click: $parent.showMarker"> </a></li>
-  		</ul>
-  	</div>
-    <div id="map"></div>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-12-push-1 title-container">
+      <h2>Tracklist London</h2>
+      <p>Places in London that have inspired famous songs</p>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9 col-sm-push-3 map-container">
+        <div id="map"></div>
+      </div>
+      <div class="col-sm-3 col-sm-pull-9 song-nav"> 
+        <p>Search through the songs:</p>
+        <input data-bind="textInput: filter, valueUpdate: 'afterkeydown'"></input>
+        <ul class="songs-list" data-bind="foreach: filterList">
+        <li><a class="placeListItems" data-bind="text: title, click: $parent.showMarker"> </a></li>
+        </ul>  
+        </div>
+    </div>
+  </div>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJTfGGUOs7oqO-vOF0thbGIq_2YC_fH1k&callback=initMap"
     ></script>
   </body>

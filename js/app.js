@@ -263,13 +263,13 @@ var highlightedIcon = 'images/yellow_record.png';
 //Function to show the GoogleMap on the site (centred nr Barbican central London)
 function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 51.623769, lng:  -0.0624430},
+        center: {lat: 51.517414, lng:  -0.120018},
         zoom: 11,
         styles: styles,
         mapTypeControl: false
       });
       //creating  var for the info window 
-      var largeInfowindow = new google.maps.InfoWindow();
+      var largeInfowindow = new google.maps.InfoWindow({});
 
       //Knockout bindings 
       ko.applyBindings(new ViewModel());
