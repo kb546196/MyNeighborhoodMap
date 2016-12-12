@@ -2,21 +2,44 @@ html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+        color: #252839; 
+        background-color: #f0b432; 
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.9em;
+
        }
 
 #list-container {
-	width: 35%; 
-  max-width: 350px; 
-	height: 100%
+	width: 30%; 
+  max-width: 300px; 
+	height: 100%; 
+
 }
 
 
 #map {
       bottom:0px;
-      height: 100%;
-      left: 35%;
+      height: 100vw;
+      left: 30%;
       right: 0px;
       position: absolute;
 }
 
-      
+h1 {
+  margin: 25px 0px 20px 20px; 
+}
+
+h3, p {
+  margin: 0px 0px 10px 20px; 
+}
+
+input { 
+  border-color: #252839; 
+  color: #252839; 
+  font-size: 24px; 
+ }
+
+li {
+    list-style-type: square;
+    margin: 5px;  
+}

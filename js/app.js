@@ -263,8 +263,8 @@ var highlightedIcon = 'images/yellow_record.png';
 //Function to show the GoogleMap on the site (centred nr Barbican central London)
 function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 51.533888, lng: -0.097642},
-        zoom: 12,
+        center: {lat: 51.623769, lng:  -0.0624430},
+        zoom: 11,
         styles: styles,
         mapTypeControl: false
       });
@@ -295,7 +295,8 @@ function ViewModel () {
         location: location,
         id: vidID,
         title: title,  
-        icon: defaultIcon
+        icon: defaultIcon,
+        animation: google.maps.Animation.DROP
     });
   
     //marker on map for each song

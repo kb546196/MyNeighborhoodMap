@@ -8,14 +8,16 @@
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src='js/app.js'></script>
     <link rel="stylesheet" href="styles/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   </head>
   <body>
   	<div id="list-container">
-  		<h2>Tracklist London</h2>
-  		<p>Places in the city that have inspired famous songs</p>
+  		<h1>Tracklist London</h1>
+  		<p>Places in London that have inspired famous songs</p>
   		<p id='filter'>Search through the songs: 
       <input data-bind="textInput: filter, valueUpdate: 'afterkeydown'"></input></p>
-  		<ul class="songs-list" data-bind="foreach: filterList">
+  		<h3>Tracklist</h3>
+      <ul class="songs-list" data-bind="foreach: filterList">
   		<li><a class="placeListItems" data-bind="text: title, click: $parent.showMarker"> </a></li>
   		</ul>
   	</div>
