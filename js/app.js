@@ -1,4 +1,6 @@
 
+//Model
+
 //Styles for GoogleMaps API
 var styles = [
   {
@@ -106,9 +108,12 @@ var styles = [
       } 
     ] 
   },
+] 
+//Icons for the map 
+var defaultIcon = 'images/black_record.png'; 
+var highlightedIcon = 'images/yellow_record.png'; 
 
-] //Array of song/ location objects  
-  
+//Array of song/ location objects  
   var tracklist  = [{
   title: "Fool on the Hill by The Beatles",
   vidID: "DGEX_7IqaC4",
@@ -256,8 +261,7 @@ var styles = [
     }
 ];
 
-var defaultIcon = 'images/black_record.png'; 
-var highlightedIcon = 'images/yellow_record.png'; 
+
 
 
 //Function to show the GoogleMap on the site (centred nr Barbican central London)
@@ -275,59 +279,72 @@ function initMap() {
       ko.applyBindings(new ViewModel());
 
 
-//view model
-function ViewModel () {
+  //view model
+  function ViewModel () {
   
-  var self = this;
+    var self = this;
 
-  //Marking the tracklist a knockout observable array  
-  self.songLocation = ko.observableArray(tracklist);
-      
-      //for loop to go through each tracklist object creating marker position full title and position
-  for (var i = 0; i < tracklist.length; i++) {
-    var position = tracklist[i].location;
-    var title = tracklist[i].title;
-    var location = tracklist[i].address; 
-    var vidID = tracklist[i].vidID; 
-    var marker = new google.maps.Marker({
-        map: map,
-        position: position,
-        location: location,
-        id: vidID,
-        title: title,  
-        icon: defaultIcon,
-        animation: google.maps.Animation.DROP
-    });
+    //Marking the tracklist a knockout observable array  
+    self.songLocation = ko.observableArray(tracklist);
+        
+        //for loop to go through each tracklist object creating marker position full title and position
+    for (var i = 0; i < tracklist.length; i++) {
+      var position = tracklist[i].location;
+      var title = tracklist[i].title;
+      var location = tracklist[i].address; 
+      //Uses the iframe element which will be populated by YouTube API
+      var vidID = '<iframe id="existing-iframe-example" width="256" height="144" src="https://www.youtube.com/embed/' + tracklist[i].vidID + '?enablejsapi=1" ?enablejsapi=1" frameborder="0"style="border: solid 4px #0d1544" ></iframe>'
+      //Use variables fomr above to create property for each song marker
+      var marker = new google.maps.Marker({
+          map: map,
+          position: position,
+          location: location,
+          vid: vidID,
+          title: title,  
+          icon: defaultIcon,
+          animation: google.maps.Animation.DROP
+      });
   
     //marker on map for each song
     self.songLocation()[i].marker = marker;
   
-  var tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    //YouTube API 
+     //code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  var player;
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('existing-iframe-example', {
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-    });
-  }
-  function onPlayerReady(event) {
-    document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';
-  }
-  
-  function onPlayerStateChange(event) {
-    changeBorderColor(event.data);
-  }
-    
-    //browser listens for marker click to make info window
+    //This  creates an <iframe> (and YouTube player) after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('existing-iframe-example', {
+          events: {
+            'onReady': onPlayerReady,
+
+            'onError:': onErrorMessage
+          }
+      });
+    }
+
+    // The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+      document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';
+    }
+
+    //This function loads an error message instead of the iframe and video into the info window
+    function onErrorMessage(event) { 
+      marker.vid = "<div>Sorry video cannot be loaded at this time please try again later</div>"; 
+    }
+     
+    //INFO WINDOW 
+
+    //browser listens for marker click to make info window and opens 
     marker.addListener('click', function() {
       self.populateInfoWindow(this, largeInfowindow);
         })
+
+    //browser listens for marker mouseover and changes color of icon
     marker.addListener('mouseover', function() {
             this.setIcon(highlightedIcon);
           });
@@ -345,8 +362,7 @@ function ViewModel () {
           infowindow.marker = marker;
           infowindow.setContent(
             '<div><h4>' + marker.title + '</h4><div>A song inspired by ' + marker.location + 
-            '</div> <iframe id="existing-iframe-example" width="256" height="144" src="https://www.youtube.com/embed/' 
-            + marker.id + '?enablejsapi=1" frameborder="0"style="border: solid 4px #37474F" ></iframe><div>Video from YouTube.</div><div>Find out more about <a href="https://en.wikipedia.org/wiki/' 
+            '</div>'  + marker.vid + '<div>Video from YouTube.</div><div>Find out more about <a href="https://en.wikipedia.org/wiki/' 
             + marker.location + '">' + marker.location + '</a>, on Wikipedia.</div>');
           infowindow.open(map, marker);
           //listern to close marker
