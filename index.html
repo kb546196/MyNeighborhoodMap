@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   </head>
   <body>
+  <!--Use bootstrap container / col for the title, map and song list -->
     <div class="container">
     <div class="row">
     <div class="col-md-12-push-1 title-container">
@@ -20,13 +21,17 @@
     </div>
     </div>
     <div class="row">
+    <!--Map to be on the right hand side for wide screen but above song list on mobile-->
       <div class="col-sm-9 col-sm-push-3 map-container">
         <div id="map"></div>
       </div>
       <div class="col-sm-3 col-sm-pull-9 song-nav"> 
         <p>Search through the songs:</p>
+        <!--Filter which updates with every key w/ ko-->
         <input data-bind="textInput: filter, valueUpdate: 'afterkeydown'"></input>
+        <!--Song list linked to filter list so only filtered titles display as well as filter effecting the markers-->
         <ul class="songs-list" data-bind="foreach: filterList">
+        <!--Link so click on song on the list to effect the marker and info Window on the map-->
         <li><a class="placeListItems" data-bind="text: title, click: $parent.showMarker"> </a></li>
         </ul>  
         </div>

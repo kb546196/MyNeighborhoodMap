@@ -44,11 +44,11 @@ li {
     margin: 5px;  
 } 
 
+/*Bootstrap grid system sorts out layout when mobile - this amends font size of list*/
 @media screen and (max-width: 767px) {
   
 .song-nav { 
   font-size: 150%; 
-  margin: auto;  
 }
 
  }
