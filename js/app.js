@@ -293,7 +293,7 @@ function initMap() {
       var title = tracklist[i].title;
       var location = tracklist[i].address; 
       //Uses the iframe element which will be populated by YouTube API
-      var vidID = '<iframe id="existing-iframe-example" width="256" height="144" src="https://www.youtube.com/embed/' + tracklist[i].vidID + '?enablejsapi=1" ?enablejsapi=1" frameborder="0"style="border: solid 4px #0d1544" ></iframe>'
+      var vidID = '<iframe id="existing-iframe-example" width="256" height="144" src="https://www.youtube.com/embed/' + tracklist[i].vidID + '?enablejsapi=1" frameborder="0"style="border: solid 4px #0d1544" ></iframe>'
       //Use variables fomr above to create property for each song marker
       var marker = new google.maps.Marker({
           map: map,
