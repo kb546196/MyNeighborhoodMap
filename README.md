@@ -8,7 +8,7 @@ The project aim is to develop a single-page application featuring a map of a nei
 
 ###Overview
 
-This project uses JavaScript, jQuery, knockoutJS, bootstrap, Google Maps API, and YouTube API to create a map of the places in London, England that have inspired songs which are marked on the map. Each marker when opened then has a video of the song and link to Wikipedia about information about the area. 
+This project uses JavaScript, jQuery, knockoutJS, bootstrap, Google Maps API, and Musixmatch API to create a map of the places in London, England that have inspired songs which are marked on the map. Each marker when opened then has lyrics from the song from Musixmatch and link to Wikipedia about information about the area. 
 
 - - - - 
 ### Getting started
@@ -22,7 +22,7 @@ References:
 
 [Google Map API](https://developers.google.com/maps/documentation/)
 
-[YouTube API](https://developers.google.com/youtube/iframe_api_reference)
+[Musixmatch API](https://developer.musixmatch.com/documentation)
 
 
 Also, it should be noted, that at times when I was stuck the [Udacity forums](https://discussions.udacity.com/c/nd001-website-optimization/website-optimization-project) were a vital resource
