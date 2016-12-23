@@ -1,54 +1,48 @@
-html, body, .container {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        color: #252839; 
-        background-color: #f0b432; 
-        font-family: 'Open Sans', sans-serif;
-        font-size: 0.9em;
-
-       }
-
-
-#map {
-      bottom:0px;
-      height: 95vh;
-      width: 100vw; 
-      left: 0px;
-      right: 0px;
+html,
+body,
+.container {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #252839;
+    background-color: #f0b432;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9em;
 }
-
-
+#map {
+    bottom: 0px;
+    height: 95vh;
+    width: 100vw;
+    left: 0px;
+    right: 0px;
+}
 .title-container {
     border-bottom-style: solid;
     margin: 0 0 10px 0;
 }
-
-.song-nav { 
-padding: 0 10px 0 0; 
+.song-nav {
+    padding: 0 10px 0 0;
 }
-
-h2, h4, p, input {
-  margin: 20px 10px 10px 20px; 
+h2,
+h4,
+p,
+input {
+    margin: 20px 10px 10px 20px;
 }
-
-input { 
-  border-color: #252839; 
-  color: #252839; 
-  font-size: 16px; 
-  margin: 0 25px; 
- }
-
+input {
+    border-color: #252839;
+    color: #252839;
+    font-size: 16px;
+    margin: 0 25px;
+}
 li {
     list-style-type: square;
-    margin: 5px;  
-} 
-
-/*Bootstrap grid system sorts out layout when mobile - this amends font size of list*/
-@media screen and (max-width: 767px) {
-  
-.song-nav { 
-  font-size: 150%; 
+    margin: 5px;
 }
+/*Bootstrap grid system sorts out layout when mobile - this amends font size of list*/
 
- }
+@media screen and (max-width: 767px) {
+    .song-nav {
+        font-size: 150%;
+    }
+}
