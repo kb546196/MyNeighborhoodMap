@@ -76,7 +76,7 @@ var styles = [{
 var defaultIcon = 'images/black_record.png';
 var highlightedIcon = 'images/yellow_record.png';
 var SongLyricsID = [];
-//Array of song/ location objects  
+//Array of song/ location objects, ordered in alphabetical order (of title)  
 var tracklist = [{
     title: "Baker Street by Gerry Rafferty",
     trackId: 17488873,
@@ -210,14 +210,14 @@ var tracklist = [{
 
 
 
-//Function to show the GoogleMap on the site (centred nr Barbican central London)
+//Function to show the GoogleMap on the site 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
-            lat: 51.517414,
-            lng: -0.120018
+            lat: 51.507414,
+            lng: -0.100018
         },
-        zoom: 11,
+        zoom: 12,
         styles: styles,
         mapTypeControl: false
     });
@@ -233,13 +233,13 @@ function initMap() {
         //KO observable array for song lyrics to go into 
         var SongLyricsArray = ko.observableArray(); 
 
-        
+        //function for ajax request for song lyrics 
         function getLyrics(musixmatchID, SongTitle) { 
 
             $.ajax({
                 type: "GET",
                 data: {
-                    apikey: "445d6196c08dc2b7490929f18149d684",
+                    apikey: "48627960cf605d23e3781ebdf0d59c89",
                     track_id: musixmatchID,
                     format: "jsonp",
                 },
@@ -251,14 +251,14 @@ function initMap() {
                     var LyricsBody = data.message.body.lyrics.lyrics_body;
                     //checking it has arrived 
                     //console.log(LyricsBody);
+                    //Pushing into SongLyricsArray w/ Song title and credit and top. 
                     SongLyricsArray.push(SongTitle + " lyrics from Musixmatch." + LyricsBody); 
-
+                    //Ordering the array into alphabetical order so it matches the order of song locations (rather than order info sent back)
                     SongLyricsArray.sort();   
 
-                    //attempting to add to each info window (div should have the ID of the track ID)
-                    //$(divID).append('<p>' + LyricsBody + 'Lyrics from Musixmatch</p>');
+                
                 },
-
+                //error message to load if problems with loading one / all of lyrics (info also added to array)
                 error: function() {
                     SongLyricsArray.push(SongTitle + " lyrics are not currently loading from Musixmatch - please try again later");
 
@@ -274,10 +274,10 @@ function initMap() {
             var title = tracklist[i].title;
             var address = tracklist[i].address;
             var songNo = i; 
-             var trackId = tracklist[i].trackId;
+            
+            var trackId = tracklist[i].trackId;
+            
             //Ajax request lyrics using track_id from Musixmatch 
-             
-
             getLyrics(trackId, title); 
             
             //Use variables fomr above to create property for each song marker
@@ -294,8 +294,6 @@ function initMap() {
             self.songLocation()[i].marker = marker;
             
 
-            
-            
 
             //INFO WINDOW 
             //browser listens for marker click to make info window and opens 
@@ -303,6 +301,13 @@ function initMap() {
                     self.populateInfoWindow(this, largeInfowindow);
                 })
                 //browser listens for marker mouseover and changes color of icon
+
+                marker.addListener('mouseover', function() {
+                    this.setIcon(highlightedIcon);
+                });
+                marker.addListener('mouseout', function() {
+                    this.setIcon(defaultIcon);
+                });
                 //or if the title in list 
             self.showMarker = function(clickedItem) {
                     self.populateInfoWindow(clickedItem.marker, largeInfowindow)
@@ -313,7 +318,7 @@ function initMap() {
             self.populateInfoWindow = function(marker, infowindow) {
                 if (infowindow.marker != marker) {
                     infowindow.marker = marker;
-
+                    //Content for each window 
                     infowindow.setContent(
                         '<div><h4>' + marker.title + '</h4>' +
                         '<p> A song inspired by ' + marker.address + ', find out more about <a href="https://en.wikipedia.org/wiki/' +
@@ -329,8 +334,6 @@ function initMap() {
          
         }
 
-        console.log(SongLyricsArray());
-
         //Filter for the list 
         self.filter = ko.observable('');
         self.filterList = ko.computed(function() {
@@ -340,11 +343,6 @@ function initMap() {
                 return matched;
             })
         })
-
-        // Loop to request lyrics for each song 
-
             
-            
-        
     }
 };
