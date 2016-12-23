@@ -234,29 +234,65 @@ function initMap() {
         var self = this;
         //Marking the tracklist a knockout observable array  
         self.songLocation = ko.observableArray(tracklist);
+        //KO observable array for song lyrics to go into 
+        var SongLyricsArray = ko.observableArray(); 
+
+        for (var j = 0; j < tracklist.length; j++) {
+
+             var trackId = tracklist[j].trackId;
+            //Ajax request lyrics using track_id from Musixmatch 
+             $.ajax({
+                type: "GET",
+                data: {
+                    apikey: "445d6196c08dc2b7490929f18149d684",
+                    track_id: trackId,
+                    format: "jsonp",
+                },
+                url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get",
+                dataType: "jsonp",
+                contentType: 'application/json',
+                success: function(data) {
+                    //Takings lyrics from the data send back
+                    var LyricsBody = data.message.body.lyrics.lyrics_body;
+                    //checking it has arrived 
+                    //console.log(LyricsBody);
+                    SongLyricsArray.push(LyricsBody);   
+                    
+
+                    //attempting to add to each info window (div should have the ID of the track ID)
+                    //$(divID).append('<p>' + LyricsBody + 'Lyrics from Musixmatch</p>');
+                },
+                error: function() {
+                    console.log("Error w/ Ajax request");
+                    SongLyricsArray.push("Lyrics not currently loading - try again later");
+                }
+            });
+
+         } 
+
         //for loop to go through each tracklist object creating marker position full title and position
         for (var i = 0; i < tracklist.length; i++) {
             var position = tracklist[i].location;
             var title = tracklist[i].title;
             var address = tracklist[i].address;
-            var trackId = tracklist[i].trackId;
+           
             SongLyricsID.push(trackId);
             //Use variables fomr above to create property for each song marker
             var marker = new google.maps.Marker({
                 map: map,
                 position: position,
                 address: address,
-                ID: trackId,
                 title: title,
                 icon: defaultIcon,
                 animation: google.maps.Animation.DROP
             });
             //marker on map for each song
             self.songLocation()[i].marker = marker;
-            //This function loads an error message instead of the iframe and video into the info window
-            function onErrorMessage(event) {
-                marker.vid = "<div>Sorry video cannot be loaded at this time please try again later</div>";
-            }
+            
+
+            
+            
+
             //INFO WINDOW 
             //browser listens for marker click to make info window and opens 
             marker.addListener('click', function() {
@@ -274,7 +310,7 @@ function initMap() {
                     infowindow.setContent(
                         '<div><h4>' + marker.title + '</h4>' +
                         '<p> A song inspired by ' + marker.address + '</p>' +
-                        '<div id="' + marker.ID + '">Lyrics go here</div>' +
+                        '<div>' + SongLyricsArray()[i] + '</div>' +
                         '<p>Find out more about <a href="https://en.wikipedia.org/wiki/' +
                         marker.address + '">' + marker.address + '</a>, on Wikipedia.</p>');
                     infowindow.open(map, marker);
@@ -284,7 +320,10 @@ function initMap() {
                     });
                 }
             };
+         
         }
+
+        console.log(SongLyricsArray());
 
         //Filter for the list 
         self.filter = ko.observable('');
@@ -297,34 +336,9 @@ function initMap() {
         })
 
         // Loop to request lyrics for each song 
-        for (var j = 0; j < SongLyricsID.length; j++) {
-            var thisSongsID = SongLyricsID[j];
-            var divID = '#' + thisSongsID;
+
             
-            //Ajax request lyrics using track_id from Musixmatch 
-            $.ajax({
-                type: "GET",
-                data: {
-                    apikey: "445d6196c08dc2b7490929f18149d684",
-                    track_id: thisSongsID,
-                    format: "jsonp",
-                },
-                url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get",
-                dataType: "jsonp",
-                contentType: 'application/json',
-                success: function(data) {
-                    //Takings lyrics from the data send back
-                    var LyricsBody = data.message.body.lyrics.lyrics_body;
-                    //checking it has arrived 
-                    console.log(LyricsBody);
-                    //attempting to add to each info window (div should have the ID of the track ID)
-                    $(divID).append('<p>' + LyricsBody + 'Lyrics from Musixmatch</p>');
-                },
-                error: function() {
-                    console.log("Error w/ Ajax request");
-                    $(divID).append('<p>Lyrics not currently loading - try again later</p>');
-                }
-            });
-        }
+            
+        
     }
 };
