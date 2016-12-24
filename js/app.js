@@ -254,7 +254,7 @@ function initMap() {
                     if (data.message.body.lyrics === undefined) { 
                     
                     //If lyrics not loading from musixmatch - then adding an error message to the array instead of lyrics    
-                    SongLyricsArray.push('Lyrics from ' + SongTitle + 'are currently not loading from MusiXmatch. Please try again later');
+                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' are currently not loading from MusiXmatch. Please try again later');
 
                     SongLyricsArray.sort();
                     }
@@ -326,13 +326,12 @@ function initMap() {
             });
 
 
-            console.log(SongLyricsArray().length); 
             //links info window and describes info to put in their
             self.populateInfoWindow = function(marker, infowindow) {
                 if (infowindow.marker != marker) {
                     infowindow.marker = marker;
                     //Content before the musiXmatch ajax request has been processed
-                    if (SongLyricsArray().length < 16) { 
+                    if (SongLyricsArray().length < tracklist.length) { 
                         infowindow.setContent(
                         '<div><h5>' + marker.title + '</h5>' +
                         '<p> A song inspired by ' + marker.address + ', find out more about <a href="https://en.wikipedia.org/wiki/' +
