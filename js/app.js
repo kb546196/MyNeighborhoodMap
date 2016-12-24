@@ -341,7 +341,7 @@ function initMap() {
                     //listern to close marker
                     infowindow.addListener('closeclick', function() {
                         infowindow.marker = null;
-                    })
+                    });
                     infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
                     setTimeout(function(){
                     marker.setAnimation(null);

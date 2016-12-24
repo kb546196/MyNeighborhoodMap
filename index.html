@@ -5,9 +5,6 @@
   <title>Tracklist London</title>
   <meta name="viewport" content="width=device-width">
   <meta charset="utf-8">
-  <script src="js/knockout.js"></script>
-  <script src="js/jquery-3.1.1.min.js"></script>
-  <script src='js/app.js'></script>
   <link rel="stylesheet" href="styles/bootstrap.min.css">
   <link rel="stylesheet" href="styles/styles.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -17,12 +14,11 @@
   <!--Use bootstrap container / col for the title, map and song list -->
   <div class="container">
     <div class="row">
-      <div class="col-md-12-push-1 title-container">
+      <header class="col-md-12-push-1 title-container">
         <h4><a href="http://www.musixmatch.com/resources">Powered by MusiXmatch</a></h4>
         <h2>Tracklist London</h2>
         <p>Places in London that have inspired famous songs</p>
-
-      </div>
+    </header>
     </div>
     <div class="row">
       <!--Map to be on the right hand side for wide screen but above song list on mobile-->
@@ -44,6 +40,9 @@
       </div>
     </div>
   </div>
+  <script src="js/knockout.js"></script>
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src='js/app.js'></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJTfGGUOs7oqO-vOF0thbGIq_2YC_fH1k&callback=initMap"></script>
 </body>
 
