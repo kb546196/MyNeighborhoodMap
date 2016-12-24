@@ -254,7 +254,7 @@ function initMap() {
                     if (data.message.body.lyrics === undefined) { 
                     
                     //If lyrics not loading from musixmatch - then adding an error message to the array instead of lyrics    
-                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' currently not loading from MusiXMatch. Please try again later');
+                    SongLyricsArray.push('Lyrics from ' + SongTitle + 'are currently not loading from MusiXmatch. Please try again later');
 
                     SongLyricsArray.sort();
                     }
@@ -265,7 +265,7 @@ function initMap() {
                     //checking it has arrived 
                     //console.log(LyricsBody);
                     //Pushing into SongLyricsArray w/ Song title and credit and top. 
-                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' powered by MusiXMatch.<p>' + LyricsBody + '</p>');
+                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' powered by MusiXmatch.<p>' + LyricsBody + '</p>');
                     //Ordering the array into alphabetical order so it matches the order of song locations (rather than order info sent back)
                     SongLyricsArray.sort();
 
@@ -273,7 +273,7 @@ function initMap() {
                 },
                 //error message to load if problems with loading one / all of lyrics (info also added to array)
                 error: function() {
-                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' currently not loading from MusiXMatch. Please try again later');
+                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' are currently not loading from MusiXmatch. Please try again later');
 
                     SongLyricsArray.sort();
                 }
@@ -290,8 +290,7 @@ function initMap() {
 
             var trackId = tracklist[i].trackId;
 
-            //Ajax request lyrics using track_id from Musixmatch 
-            getLyrics(trackId, title);
+            
 
             //Use variables fomr above to create property for each song marker
             var marker = new google.maps.Marker({
@@ -306,7 +305,8 @@ function initMap() {
             //marker on map for each song
             self.songLocation()[i].marker = marker;
 
-
+            //Ajax request lyrics using track_id from Musixmatch 
+            getLyrics(trackId, title);
 
             //INFO WINDOW 
             //browser listens for marker click to make info window and opens 
@@ -326,17 +326,27 @@ function initMap() {
             });
 
 
-
+            console.log(SongLyricsArray().length); 
             //links info window and describes info to put in their
             self.populateInfoWindow = function(marker, infowindow) {
                 if (infowindow.marker != marker) {
                     infowindow.marker = marker;
-                    //Content for each window 
+                    //Content before the musiXmatch ajax request has been processed
+                    if (SongLyricsArray().length < 16) { 
+                        infowindow.setContent(
+                        '<div><h5>' + marker.title + '</h5>' +
+                        '<p> A song inspired by ' + marker.address + ', find out more about <a href="https://en.wikipedia.org/wiki/' +
+                        marker.address + '">' + marker.address + '</a>, on Wikipedia.</p>' +
+                        '<p>Lyrics are still loading from MusiXmatch, try another song.</p>');
+                    }
+                    //Content when the ajax lyrics request is ready
+                    else {
                     infowindow.setContent(
                         '<div><h5>' + marker.title + '</h5>' +
                         '<p> A song inspired by ' + marker.address + ', find out more about <a href="https://en.wikipedia.org/wiki/' +
                         marker.address + '">' + marker.address + '</a>, on Wikipedia.</p>' +
                         '<p>' + SongLyricsArray()[marker.songNo] + '</p>');
+                    }
                     infowindow.open(map, marker);
                     //listern to close marker
                     infowindow.addListener('closeclick', function() {
@@ -350,6 +360,8 @@ function initMap() {
             };
         }
 
+
+
         //Filter for the list 
         self.filter = ko.observable('');
         self.filterList = ko.computed(function() {
@@ -361,6 +373,7 @@ function initMap() {
         });
 
     }
+    //Timeout request incase error running GoogleMaps 
 } setTimeout(function(){
         document.getElementById('map').append("There's been a problem loading GoogleMaps please try again later.");
-                    }, 1500); 
+                    }, 2000); 
