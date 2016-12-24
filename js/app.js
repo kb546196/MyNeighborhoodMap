@@ -218,8 +218,11 @@ function initMap() {
         },
         zoom: 12,
         styles: styles,
-        mapTypeControl: false
-    });
+        mapTypeControl: false}); 
+
+        
+ 
+
     //creating  var for the info window 
     var largeInfowindow = new google.maps.InfoWindow({});
     //Knockout bindings 
@@ -338,16 +341,13 @@ function initMap() {
                     //listern to close marker
                     infowindow.addListener('closeclick', function() {
                         infowindow.marker = null;
-                    });
-                    //Animate the marker when info window opens
-                    infowindow.marker.setAnimation(google.maps.Animation.BOUNCE); 
-                    setTimeout(function() {
-                        marker.setAnimation(null); 
-                    }, 720);  
-
-                 }
+                    })
+                    infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
+                    setTimeout(function(){
+                    marker.setAnimation(null);
+                    }, 720);
+                }
             };
-
         }
 
         //Filter for the list 
@@ -361,4 +361,6 @@ function initMap() {
         });
 
     }
-}
+} setTimeout(function(){
+        document.getElementById('map').append("There's been a problem loading GoogleMaps please try again later.");
+                    }, 1500); 
