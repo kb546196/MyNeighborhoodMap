@@ -246,6 +246,17 @@ function initMap() {
                 dataType: "jsonp",
                 contentType: 'application/json',
                 success: function(data) {
+                     
+
+                    if (data.message.body.lyrics === undefined) { 
+                    
+                    //If lyrics not loading from musixmatch - then adding an error message to the array instead of lyrics    
+                    SongLyricsArray.push(SongTitle + " lyrics are not currently loading from Musixmatch - please try again later");
+
+                    SongLyricsArray.sort();
+                    }
+                    else { 
+                        
                     //Takings lyrics from the data send back
                     var LyricsBody = data.message.body.lyrics.lyrics_body;
                     //checking it has arrived 
@@ -255,7 +266,7 @@ function initMap() {
                     //Ordering the array into alphabetical order so it matches the order of song locations (rather than order info sent back)
                     SongLyricsArray.sort();
 
-
+                    }
                 },
                 //error message to load if problems with loading one / all of lyrics (info also added to array)
                 error: function() {
