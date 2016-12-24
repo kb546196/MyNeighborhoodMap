@@ -339,7 +339,13 @@ function initMap() {
                     infowindow.addListener('closeclick', function() {
                         infowindow.marker = null;
                     });
-                }
+                    //Animate the marker when info window opens
+                    infowindow.marker.setAnimation(google.maps.Animation.BOUNCE); 
+                    setTimeout(function() {
+                        marker.setAnimation(null); 
+                    }, 720);  
+
+                 }
             };
 
         }
