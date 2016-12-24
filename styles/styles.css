@@ -24,10 +24,15 @@ body,
     padding: 0 10px 0 0;
 }
 h2,
-h4,
+h5,
 p,
 input {
     margin: 20px 10px 10px 20px;
+}
+
+h4 { 
+    text-align: right; 
+    margin: 20px 0 -35px 20px}
 }
 input {
     border-color: #252839;
@@ -45,4 +50,12 @@ li {
     .song-nav {
         font-size: 150%;
     }
+
+    h2, h4, h5, p, input { 
+        text-align: center; 
+    }
+
+    h4 {  
+    margin: 10px 0 }
+}
 }

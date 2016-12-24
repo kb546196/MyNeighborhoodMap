@@ -254,7 +254,7 @@ function initMap() {
                     if (data.message.body.lyrics === undefined) { 
                     
                     //If lyrics not loading from musixmatch - then adding an error message to the array instead of lyrics    
-                    SongLyricsArray.push(SongTitle + " lyrics are not currently loading from Musixmatch - please try again later");
+                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' currently not loading from MusiXMatch. Please try again later');
 
                     SongLyricsArray.sort();
                     }
@@ -265,7 +265,7 @@ function initMap() {
                     //checking it has arrived 
                     //console.log(LyricsBody);
                     //Pushing into SongLyricsArray w/ Song title and credit and top. 
-                    SongLyricsArray.push(SongTitle + " lyrics from Musixmatch: " + LyricsBody);
+                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' powered by MusiXMatch.<p>' + LyricsBody + '</p>');
                     //Ordering the array into alphabetical order so it matches the order of song locations (rather than order info sent back)
                     SongLyricsArray.sort();
 
@@ -273,7 +273,7 @@ function initMap() {
                 },
                 //error message to load if problems with loading one / all of lyrics (info also added to array)
                 error: function() {
-                    SongLyricsArray.push(SongTitle + " lyrics are not currently loading from Musixmatch - please try again later");
+                    SongLyricsArray.push('Lyrics from ' + SongTitle + ' currently not loading from MusiXMatch. Please try again later');
 
                     SongLyricsArray.sort();
                 }
@@ -333,7 +333,7 @@ function initMap() {
                     infowindow.marker = marker;
                     //Content for each window 
                     infowindow.setContent(
-                        '<div><h4>' + marker.title + '</h4>' +
+                        '<div><h5>' + marker.title + '</h5>' +
                         '<p> A song inspired by ' + marker.address + ', find out more about <a href="https://en.wikipedia.org/wiki/' +
                         marker.address + '">' + marker.address + '</a>, on Wikipedia.</p>' +
                         '<p>' + SongLyricsArray()[marker.songNo] + '</p>');
