@@ -354,7 +354,7 @@ function initMap() {
                     infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
                     setTimeout(function(){
                     marker.setAnimation(null);
-                    }, 720);
+                    }, 700);
                 }
             };
         }
@@ -372,7 +372,10 @@ function initMap() {
         });
 
     }
-    //Timeout request incase error running GoogleMaps 
-} setTimeout(function(){
-        document.getElementById('map').append("There's been a problem loading GoogleMaps please try again later.");
-                    }, 2000); 
+}
+
+
+function googleMapError() {
+  document.getElementById('map').innerHTML =
+    '<div class="error-message">There has been a problem loading Google Maps please try again later</div>'; 
+} 
